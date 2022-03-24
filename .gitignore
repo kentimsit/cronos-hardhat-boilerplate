@@ -1,0 +1,17 @@
+
+.idea
+.env
+.DS_Store
+.vscode
+
+# Directories
+node_modules
+build
+
+# Generated files
+coverage
+coverage.json
+
+#Hardhat files
+cache
+artifacts
