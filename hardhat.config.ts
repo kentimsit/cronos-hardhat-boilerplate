@@ -46,8 +46,8 @@ const config: HardhatUserConfig = {
     },
   },
   gasReporter: {
-    currency: "EUR",
-    gasPrice: 50,
+    currency: "USD",
+    gasPrice: 5000, // In GWei
     coinmarketcap: <string>process.env["COINMARKETCAP_API"],
   },
 };
