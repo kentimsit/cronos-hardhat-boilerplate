@@ -34,3 +34,9 @@ npx hardhat run scripts/DeployMyERC20.script.ts --network ganache
 ```shell
 npx hardhat run scripts/DeployMyERC20.script.ts --network cronos
 ```
+
+## Contract verification on Cronoscan
+
+```shell
+npx hardhat verify --constructor-args scripts/deploy-verification-arguments.js DEPLOYED_CONTRACT_ADDRESS --network cronos
+```
