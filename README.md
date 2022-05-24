@@ -5,17 +5,13 @@
 The dependencies have been installed with:
 
 ```shell
-npm install --save-dev hardhat hardhat-gas-reporter
 
-npm install --save-dev typescript ts-node
-
-npm install --save-dev typechain
-
-npm install --save-dev chai @types/node @types/mocha @types/chai ethereum-waffle
-
-npm install --save-dev @nomiclabs/hardhat-ethers @nomiclabs/hardhat-waffle @typechain/ethers-v5 @typechain/hardhat
+npx hardhat
+# "❯ Create an advanced sample project that uses TypeScript"
 
 npm install ethers dotenv @openzeppelin/contracts
+
+npm install --save-dev solidity-coverage hardhat-gas-reporter
 ```
 
 ## Set-up
@@ -29,6 +25,7 @@ npm install
 ```shell
 npx hardhat compile
 npx hardhat test
+npx hardhat coverage
 npx hardhat run scripts/DeployMyERC20.script.ts --network ganache
 ```
 
