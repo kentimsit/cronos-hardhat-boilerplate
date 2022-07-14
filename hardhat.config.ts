@@ -7,6 +7,7 @@ import "@nomiclabs/hardhat-waffle";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "@nomiclabs/hardhat-etherscan";
+import "./cronos-plugin";
 
 const myPrivateKey: string = <string>process.env.MY_PRIVATE_KEY;
 
@@ -41,6 +42,7 @@ const config: HardhatUserConfig = {
   etherscan: {
     apiKey: {
       cronos: <string>process.env["CRONOSCAN_API"],
+      cronosTestnet: <string>process.env["CRONOSCAN_API"],
     },
   },
   solidity: {

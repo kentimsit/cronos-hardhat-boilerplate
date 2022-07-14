@@ -10,7 +10,8 @@ npx hardhat
 # "❯ Create an advanced sample project that uses TypeScript"
 
 npm install ethers dotenv @openzeppelin/contracts
-
+npm install --save-dev @nomiclabs/hardhat-etherscan@^3.1.0
+npm install --save-dev @cronos-labs/hardhat-cronoscan
 npm install --save-dev solidity-coverage hardhat-gas-reporter
 ```
 
