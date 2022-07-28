@@ -12,7 +12,8 @@ npx hardhat
 npm install ethers dotenv @openzeppelin/contracts
 npm install --save-dev @nomiclabs/hardhat-etherscan@^3.1.0
 npm install --save-dev @cronos-labs/hardhat-cronoscan
-npm install --save-dev solidity-coverage hardhat-gas-reporter
+npm install --save-dev solidity-coverage
+npm install --save-dev hardhat-gas-reporter
 ```
 
 ## Set-up
@@ -57,7 +58,7 @@ npx hardhat verify --list-networks
 Verify on Cronos Testnet:
 
 ```shell
-npx hardhat verify --network cronosTestnet DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"
+npx hardhat verify --network cronosTestnet DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1" "Constructor argument 2"
 
 # For example:
 npx hardhat verify --network cronosTestnet "0xf70333ABcE27D26ACa444457735F5f95AA0bf6ce" "My token name" "My token symbol"
@@ -66,5 +67,5 @@ npx hardhat verify --network cronosTestnet "0xf70333ABcE27D26ACa444457735F5f95AA
 Verify on Cronos Mainnet:
 
 ```shell
-npx hardhat verify --network cronos DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1"
+npx hardhat verify --network cronos DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1" "Constructor argument 2"
 ```
