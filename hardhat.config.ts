@@ -7,7 +7,7 @@ import "@nomiclabs/hardhat-waffle";
 import "hardhat-gas-reporter";
 import "solidity-coverage";
 import "@nomiclabs/hardhat-etherscan";
-import "./cronos-plugin";
+import "@cronos-labs/hardhat-cronoscan";
 
 const myPrivateKey: string = <string>process.env.MY_PRIVATE_KEY;
 
@@ -26,7 +26,7 @@ const config: HardhatUserConfig = {
       url: "HTTP://127.0.0.1:7545",
       accounts: [myPrivateKey],
     },
-    cronos_testnet: {
+    cronosTestnet: {
       url: "https://evm-t3.cronos.org/",
       chainId: 338,
       accounts: [myPrivateKey],
@@ -41,8 +41,8 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      cronos: <string>process.env["CRONOSCAN_API"],
-      cronosTestnet: <string>process.env["CRONOSCAN_API"],
+      cronosTestnet: <string>process.env["CRONOSCAN_TESTNET_API_KEY"],
+      cronos: <string>process.env["CRONOSCAN_API_KEY"],
     },
   },
   solidity: {
