@@ -1,53 +1,73 @@
 # Cronos Hardhat Boilerplate
 
+## Note
+
+Removed `npm install --save-dev @cronos-labs/hardhat-cronoscan` for now, checking with team.
+
 ## Hardhat dependencies (including typescript dependencies) included in this repo
 
-The dependencies have been installed with:
+This project was created with `npx hardhat` (see hardhat.org), using Typescript.
 
-```shell
+It leverages the following libraries:
 
-npx hardhat
-# "❯ Create an advanced sample project that uses TypeScript"
-
-npm install ethers dotenv @openzeppelin/contracts
-npm install --save-dev @nomiclabs/hardhat-etherscan@^3.1.0
-npm install --save-dev @cronos-labs/hardhat-cronoscan
-npm install --save-dev solidity-coverage
-npm install --save-dev hardhat-gas-reporter
-```
+-   OpenZeppelin contracts (https://docs.openzeppelin.com/contracts/)
 
 ## Set-up
 
-```shell
+```bash
 npm install
 ```
 
+Set-up configuration file `hardhat.config.ts` including network details for Cronos blockchain.
+
+Create .env file for environment variables, using .env.example as template.
+
+# Create your contract(s)
+
+In the /contracts directory.
+
+Use https://wizard.openzeppelin.com/ to generate standard code.
+
 ## Local deployment and testing
 
-```shell
+Compile the smart contracts:
+
+```bash
 npx hardhat compile
-npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/DeployMyERC20.script.ts --network ganache
 ```
 
-## Deployment to cronos
+Execute the test script, and then calculate the test coverage of the smart contract code:
+
+```bash
+npx hardhat test
+npx hardhat coverage
+```
+
+The test also incluces a gas report when the .env file includes: `REPORT_GAS=true npx hardhat test`
+
+Deploy the smart contract to the local blockchain network:
+
+```bash
+npx hardhat run scripts/DeployMyERC20.script.ts --network hardhat
+```
+
+## Deployment to Cronos
 
 Cronos Tesnet:
 
-```shell
-npx hardhat run scripts/DeployMyERC20.script.ts --network cronos_testnet
+```bash
+npx hardhat run scripts/DeployMyERC20.script.ts --network cronosTestnet
 ```
 
 Cronos Mainnet:
 
-```shell
+```bash
 npx hardhat run scripts/DeployMyERC20.script.ts --network cronos
 ```
 
 ## Contract verification on Cronoscan
 
-Contract verification requires a dedicated Cronos plug-in for Hardhat: see documentation at https://www.npmjs.com/package/@cronos-labs/hardhat-cronoscan and follow the instructions.
+Contract verification requires custom chain configuration in `hardhat.config.ts`. See the `hardhat.config.ts` file in this repository for Cronos testnet and mainnet configurations.
 
 Check list of supported network:
 
@@ -59,13 +79,28 @@ Verify on Cronos Testnet:
 
 ```shell
 npx hardhat verify --network cronosTestnet DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1" "Constructor argument 2"
+```
 
-# For example:
-npx hardhat verify --network cronosTestnet "0xf70333ABcE27D26ACa444457735F5f95AA0bf6ce" "My token name" "My token symbol"
+For example in this case:
+
+```bash
+npx hardhat verify --network cronosTestnet "0x3F273114f20f87C602D87E1f1cd87D6F3ae5Ac72" --constructor-args "./scripts/deploy-verification-arguments.js"
+```
+
+or
+
+```bash
+npx hardhat verify --network cronosTestnet "0x3F273114f20f87C602D87E1f1cd87D6F3ae5Ac72" "My token name" "My token symbol"
 ```
 
 Verify on Cronos Mainnet:
 
-```shell
+```bash
 npx hardhat verify --network cronos DEPLOYED_CONTRACT_ADDRESS "Constructor argument 1" "Constructor argument 2"
+```
+
+for example in this case:
+
+```bash
+npx hardhat verify --network cronos "0x5110ceB3f5fEd7484fda722A775927d238275D44" --constructor-args "./scripts/deploy-verification-arguments.js"
 ```

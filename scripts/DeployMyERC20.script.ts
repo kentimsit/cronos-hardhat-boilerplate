@@ -7,30 +7,37 @@ import hre from "hardhat";
 const contractName = "MyERC20";
 
 async function main() {
-  await run("compile");
+    await run("compile");
 
-  const accounts = await ethers.getSigners();
+    const accounts = await ethers.getSigners();
 
-  console.log(
-    "Accounts:",
-    accounts.map((a) => a.address)
-  );
+    console.log(
+        "Accounts:",
+        accounts.map((a) => a.address)
+    );
 
-  const myContract = await hre.ethers.getContractFactory(contractName);
-  const contractInstance = await myContract.deploy(
-    "My token name",
-    "My token symbol"
-  );
+    const myContract = await hre.ethers.getContractFactory(contractName);
+    const contractInstance = await myContract.deploy(
+        "My token name",
+        "My token symbol"
+    );
 
-  const tx = await contractInstance.deployed();
+    await contractInstance.waitForDeployment();
+    const tx = contractInstance.deploymentTransaction();
 
-  console.log(contractName, "contract deployed to:", contractInstance.address);
-  console.log("with transaction hash", tx.deployTransaction.hash);
+    console.log(
+        contractName,
+        "contract deployed to:",
+        await contractInstance.getAddress()
+    );
+    if (tx) {
+        console.log("with transaction hash", tx.hash);
+    }
 }
 
 main()
-  .then(() => process.exit(0))
-  .catch((error) => {
-    console.error(error);
-    process.exit(1);
-  });
+    .then(() => process.exit(0))
+    .catch((error) => {
+        console.error(error);
+        process.exit(1);
+    });

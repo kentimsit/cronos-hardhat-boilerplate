@@ -8,6 +8,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
 import "@openzeppelin/contracts/access/AccessControlEnumerable.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Context.sol";
+// Uncomment this line to use console.log
 import "hardhat/console.sol";
 
 contract MyERC20 is

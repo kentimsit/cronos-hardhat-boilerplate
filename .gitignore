@@ -1,17 +1,17 @@
+node_modules
+build
+.env
+coverage
+coverage.json
+typechain
+typechain-types
 
+# Hardhat files
+cache
+artifacts
+
+# IDE
 .idea
 .env
 .DS_Store
 .vscode
-
-# Directories
-node_modules
-build
-
-# Generated files
-coverage
-coverage.json
-
-#Hardhat files
-cache
-artifacts
