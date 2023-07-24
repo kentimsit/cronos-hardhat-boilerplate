@@ -1,9 +1,5 @@
 # Cronos Hardhat Boilerplate
 
-## Note
-
-Removed `npm install --save-dev @cronos-labs/hardhat-cronoscan` for now, checking with team.
-
 ## Hardhat dependencies (including typescript dependencies) included in this repo
 
 This project was created with `npx hardhat` (see hardhat.org), using Typescript.
