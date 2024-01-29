@@ -63,7 +63,7 @@ npx hardhat run scripts/DeployMyERC20.script.ts --network cronos
 
 Don't forget to note the address of the contract after deployment.
 
-## Contract verification on Cronoscan
+## Contract verification on the block explorer
 
 For contract verification, you need an API key for the Explorer API. Here are the URLs where you can register in order to request an API key:
 
