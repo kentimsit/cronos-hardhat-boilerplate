@@ -23,46 +23,64 @@ const config: HardhatUserConfig = {
             url: "HTTP://127.0.0.1:7545",
             accounts: [myPrivateKey],
         },
-        cronosTestnet: {
-            url: "https://evm-t3.cronos.org/",
-            chainId: 338,
-            accounts: [myPrivateKey],
-            gasPrice: 5000000000000,
-        },
         cronos: {
             url: "https://evm.cronos.org/",
             chainId: 25,
             accounts: [myPrivateKey],
-            gasPrice: 5000000000000,
+            gasPrice: 10100000000000,
+        },
+        cronosTestnet: {
+            url: "https://evm-t3.cronos.org/",
+            chainId: 338,
+            accounts: [myPrivateKey],
+            gasPrice: 10100000000000,
+        },
+        ethereumSepoliaTestnet: {
+            url: process.env.ETHEREUM_SEPOLIA_URL,
+            chainId: 11155111,
+            accounts: [myPrivateKey],
         },
     },
     etherscan: {
         apiKey: {
             mainnet: <string>process.env["ETHERSCAN_API_KEY"],
-            cronosTestnet: <string>process.env["CRONOSCAN_TESTNET_API_KEY"],
-            cronos: <string>process.env["CRONOSCAN_API_KEY"],
+            sepolia: <string>process.env["ETHERSCAN_API_KEY"],
+            cronos: <string>process.env["CRONOS_EXPLORER_MAINNET_API_KEY"],
+            // As Cronoscan is being replaced by Cronos Explorer, the old settings are commented out.
+            // cronos: <string>process.env["CRONOSCAN_API_KEY"],
+            cronosTestnet: <string>process.env["CRONOS_EXPLORER_TESTNET_API_KEY"],
+            
         },
         customChains: [
-            {
-                network: "cronosTestnet",
-                chainId: 338,
-                urls: {
-                    apiURL: "https://cronos.org/explorer/testnet3/api",
-                    browserURL: "https://cronos.org/explorer/testnet3",
-                },
-            },
             {
                 network: "cronos",
                 chainId: 25,
                 urls: {
-                    apiURL: "https://api.cronoscan.com/api",
-                    browserURL: "https://cronoscan.com",
+                    apiURL: "https://explorer-api.cronos.org/mainnet/api/v1/hardhat/contract",
+                    browserURL: "https://explorer.cronos.org",
+                },
+            },
+            // As Cronoscan is being replaced by Cronos Explorer, the old settings are commented out.
+            // {
+            //     network: "cronos",
+            //     chainId: 25,
+            //     urls: {
+            //         apiURL: "https://api.cronoscan.com/api",
+            //         browserURL: "https://cronoscan.com",
+            //     },
+            // },
+            {
+                network: "cronosTestnet",
+                chainId: 338,
+                urls: {
+                    apiURL: "https://explorer-api.cronos.org/testnet/api/v1/hardhat/contract",
+                    browserURL: "https://explorer.cronos.org/testnet",
                 },
             },
         ],
     },
     solidity: {
-        version: "0.8.19",
+        version: "0.8.20",
         settings: {
             optimizer: {
                 enabled: true,
