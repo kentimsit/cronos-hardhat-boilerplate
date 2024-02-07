@@ -48,8 +48,9 @@ const config: HardhatUserConfig = {
             cronos: <string>process.env["CRONOS_EXPLORER_MAINNET_API_KEY"],
             // As Cronoscan is being replaced by Cronos Explorer, the old settings are commented out.
             // cronos: <string>process.env["CRONOSCAN_API_KEY"],
-            cronosTestnet: <string>process.env["CRONOS_EXPLORER_TESTNET_API_KEY"],
-            
+            cronosTestnet: <string>(
+                process.env["CRONOS_EXPLORER_TESTNET_API_KEY"]
+            ),
         },
         customChains: [
             {
