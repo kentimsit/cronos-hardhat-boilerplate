@@ -7,6 +7,12 @@ import "@nomicfoundation/hardhat-ethers";
 import "hardhat-gas-reporter";
 
 const myPrivateKey: string = <string>process.env.MY_PRIVATE_KEY;
+const cronosApiKeyMainnet: string = <string>(
+    process.env.CRONOS_EXPLORER_MAINNET_API_KEY
+);
+const cronosApiKeyTestnet: string = <string>(
+    process.env.CRONOS_EXPLORER_TESTNET_API_KEY
+);
 
 task("accounts", "Prints the list of accounts", async (args, hre) => {
     const accounts = await hre.ethers.getSigners();
@@ -45,23 +51,36 @@ const config: HardhatUserConfig = {
         apiKey: {
             mainnet: <string>process.env["ETHERSCAN_API_KEY"],
             sepolia: <string>process.env["ETHERSCAN_API_KEY"],
-            cronos: <string>process.env["CRONOS_EXPLORER_MAINNET_API_KEY"],
-            // As Cronoscan is being replaced by Cronos Explorer, the old settings are commented out.
+            cronos: cronosApiKeyMainnet,
+            cronosTestnet: cronosApiKeyTestnet,
+            // As Cronoscan is being replaced by Cronos Explorer, the old settings below are commented out.
             // cronos: <string>process.env["CRONOSCAN_API_KEY"],
-            cronosTestnet: <string>(
-                process.env["CRONOS_EXPLORER_TESTNET_API_KEY"]
-            ),
         },
         customChains: [
+            // Note that the Cronos Explorer API requires the API Key to be part of the URL below as well,
+            // so it's not enough to just set the apiKey above.
+            // This is different from Etherscan, where the API Key is passed as a separate parameter.
             {
                 network: "cronos",
                 chainId: 25,
                 urls: {
-                    apiURL: "https://explorer-api.cronos.org/mainnet/api/v1/hardhat/contract",
+                    apiURL:
+                        "https://explorer-api.cronos.org/mainnet/api/v1/hardhat/contract?apikey=" +
+                        cronosApiKeyMainnet,
                     browserURL: "https://explorer.cronos.org",
                 },
             },
-            // As Cronoscan is being replaced by Cronos Explorer, the old settings are commented out.
+            {
+                network: "cronosTestnet",
+                chainId: 338,
+                urls: {
+                    apiURL:
+                        "https://explorer-api.cronos.org/testnet/api/v1/hardhat/contract?apikey=" +
+                        cronosApiKeyTestnet,
+                    browserURL: "https://explorer.cronos.org/testnet",
+                },
+            },
+            // As Cronoscan is being replaced by Cronos Explorer, the old settings below are commented out.
             // {
             //     network: "cronos",
             //     chainId: 25,
@@ -70,14 +89,6 @@ const config: HardhatUserConfig = {
             //         browserURL: "https://cronoscan.com",
             //     },
             // },
-            {
-                network: "cronosTestnet",
-                chainId: 338,
-                urls: {
-                    apiURL: "https://explorer-api.cronos.org/testnet/api/v1/hardhat/contract",
-                    browserURL: "https://explorer.cronos.org/testnet",
-                },
-            },
         ],
     },
     solidity: {
@@ -93,6 +104,9 @@ const config: HardhatUserConfig = {
         currency: "USD",
         gasPrice: 5000, // In GWei
         coinmarketcap: <string>process.env["COINMARKETCAP_API"],
+    },
+    sourcify: {
+        enabled: false,
     },
 };
 
